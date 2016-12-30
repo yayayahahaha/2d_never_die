@@ -37,7 +37,6 @@
  			var $ = cheerio.load(b);
  			var scripts = $("script");
  			var script = $(scripts)[8].children[0].data;
- 			console.log(script);
  			javascriptS.push(script);
 
  			jsAjaxfinished(result.length, javascriptS);
@@ -52,7 +51,7 @@
  		if (now == total) {
  			now = 0;
  			for (var i = 0; i < javascriptS.length; i++) {
- 				var html = "<!DOCTYPE html> <html lang='en'> <head> <meta charset='UTF-8'> <title></title> </head> <body data-pinterest-extension-installed='cr2.0.5'> <div id='videoContainer'></div> <script type='text/javascript' src='jwplayer.js'></script> <script type='text/javascript' src='jwpsrv.js'></script> <script type='text/javascript' src='related.js'></script> <script type='text/javascript' src='plugins/inject.js'></script> <script type='text/javascript' src='CommentCoreLibrary.min.js'></script> <script type='text/javascript' src='msgpack.min.js'></script> <script type='text/javascript'> function execue(){"+javascriptS[i]+"}execue(); </script> </body> </html>";
+ 				var html = "<!DOCTYPE html> <html lang='en'> <head> <script src='https://code.jquery.com/jquery-3.1.1.min.js'></script><meta charset='UTF-8'> <title></title> </head> <body data-pinterest-extension-installed='cr2.0.5'> <div id='videoContainer'></div> <script type='text/javascript' src='jwplayer.js'></script> <script type='text/javascript' src='jwpsrv.js'></script> <script type='text/javascript' src='related.js'></script> <script type='text/javascript' src='plugins/inject.js'></script> <script type='text/javascript' src='CommentCoreLibrary.min.js'></script> <script type='text/javascript' src='msgpack.min.js'></script> <script type='text/javascript'> function execue(){"+javascriptS[i]+"}execue();; </script> </body> </html>";
  				fs.writeFileSync("result" + (i + 1) + ".html", html);
  			}
  		}
