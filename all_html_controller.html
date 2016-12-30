@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<meta charset="UTF-8">
 	<title>All html Controller</title>
 </head>
@@ -9,9 +10,13 @@
 <body>
 	<input type="text" id="number">集數
 	<button id="btn">點我</button>
+	<hr>
+	<button id="btn2">點完點我之後</button>
 
 	<script>
 		var btn = document.querySelector("#btn");
+		var btn2 = document.querySelector("#btn2");
+
 		btn.onclick = function() {
 			var number = parseInt(document.querySelector("#number").value);
 			console.log("number:" + number);
@@ -19,6 +24,44 @@
 				window.open("./result" + (i + 1) + ".html");
 			}
 		}
+
+		var finalArray = [];
+		btn2.onclick = function() {
+			var number = parseInt(document.querySelector("#number").value);
+			for (var i = 0; i < number; i++) {
+				$.ajax({
+					async:false,
+					global:false,
+					url: 'https://demo-project-flyc-2.c9.io/php/'+(i+1)+'.txt',
+					type: 'get'
+				})
+				.done(function(res) {
+					finalArray.push({
+						"name":i,
+						"link":res
+					});
+				});
+			}
+
+			setTimeout(function() {
+				console.log(finalArray);
+				$.ajax({
+					async:false,
+					global:false,
+					url: 'https://demo-project-flyc-2.c9.io/php/request.php',
+					type: 'post',
+					data:{
+						"save_path":"finalArray",
+						"save_value": JSON.stringify(finalArray)
+					}
+				})
+				.done(function(res) {
+					console.log(finalArray);
+					console.log("DONE!");
+				});
+			}, 1500);
+		}
+
 	</script>
 </body>
 </html>
