@@ -50,8 +50,11 @@
  		now++;
  		console.log((now * 100 / total).toFixed(2) + "%");
  		if (now == total) {
- 			console.log(javascriptS);
- 			fs.writeFileSync("result.json", JSON.stringify(javascriptS));
+ 			now = 0;
+ 			for (var i = 0; i < javascriptS.length; i++) {
+ 				var html = "<!DOCTYPE html> <html lang='en'> <head> <meta charset='UTF-8'> <title></title> </head> <body data-pinterest-extension-installed='cr2.0.5'> <div id='videoContainer'></div> <script type='text/javascript' src='jwplayer.js'></script> <script type='text/javascript' src='jwpsrv.js'></script> <script type='text/javascript' src='related.js'></script> <script type='text/javascript' src='plugins/inject.js'></script> <script type='text/javascript' src='CommentCoreLibrary.min.js'></script> <script type='text/javascript' src='msgpack.min.js'></script> <script type='text/javascript'> function execue(){"+javascriptS[i]+"}execue(); </script> </body> </html>";
+ 				fs.writeFileSync("result" + (i + 1) + ".html", html);
+ 			}
  		}
  	}
 
