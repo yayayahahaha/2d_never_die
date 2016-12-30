@@ -1,4 +1,4 @@
-console.log("hello");
+console.log("Hello, Welcome to PhantomJS");
 var cheerio = require('cheerio');
 
 var page = new WebPage();
@@ -31,16 +31,12 @@ function afterGetEncodeHref() {
 	console.log("========================================================================");
 	console.log("after get encode href");
 	console.log("========================================================================");
+
 	var page2 = new WebPage();
-	page2.open(encodeHref[0], function(st) {
-		if (st === "success") {
-			var $ = cheerio.load(page2.content);
-			var scripts = $("script");
-
-			console.log($(scripts)[10]);
-
-			page2.close();
-			phantom.exit();
-		}
+	page2.open("https://www.google.com.tw", function(res) {
+		console.log(res);
+		page2.includeJs("http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js", function() {
+			console.log($);
+		});
 	});
 }
