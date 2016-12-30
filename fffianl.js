@@ -43,11 +43,8 @@
  		});
  	};
 
- 	for (var i = 0; i < 1; i++) {
- 		// console.log(json[i].link);
- 		
-
- 		download('https://cdn.sstatic.net/Sites/stackoverflow/img/sprites.svg?v=8c1c8cba242e', "0.svg", function() {
+ 	for (var i = 0; i < json.length; i++) {
+ 		download(json[i].link, json[i].name+".mp4", function() {
  			console.log("done");
  		});
  	}
