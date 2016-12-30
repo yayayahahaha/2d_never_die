@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>All html Controller</title>
+</head>
+
+
+<body>
+	<input type="text" id="number">集數
+	<button id="btn">點我</button>
+
+	<script>
+		var btn = document.querySelector("#btn");
+		btn.onclick = function() {
+			var number = parseInt(document.querySelector("#number").value);
+			console.log("number:" + number);
+			for (var i = 0; i < number; i++) {
+				window.open("./result" + (i + 1) + ".html");
+			}
+		}
+	</script>
+</body>
+</html>
